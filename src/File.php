@@ -136,10 +136,16 @@ class File
 
         // #28: File not cleaned up if user aborts connection during download
         if ($this->ignoreUserAbort) {
-            ignore_user_abort(true);
+            $ignoreUserAbort = ignore_user_abort(true);
         }
 
-        readfile($this->_fileName);
+        try {
+            readfile($this->_fileName);
+        } finally {
+            if (isset($ignoreUserAbort)) {
+                ignore_user_abort($ignoreUserAbort);
+            }
+        }
     }
 
     /**
