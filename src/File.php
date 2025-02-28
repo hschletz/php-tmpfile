@@ -106,7 +106,7 @@ class File
         if ($contentType !== null) {
             $headers['Content-Type'] = $contentType;
         } elseif (!isset($headers['Content-Type'])) {
-            $contentType = @mime_content_type($this->_filename);
+            $contentType = @mime_content_type($this->_fileName);
             if ($contentType === false) {
                 $contentType = self::DEFAULT_CONTENT_TYPE;
             }
